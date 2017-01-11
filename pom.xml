@@ -15,7 +15,7 @@
   </properties>
   
   <name>ThriftJ</name>
-  <url>https://github.com/cyfonly/thriftj</url>
+  <url>https://github.com/cyfonly/ThriftJ</url>
   <description>A failover and load balance Thrift client with pooled connections</description>
   
   <developers>
@@ -27,9 +27,9 @@
   </developers>
   
   <scm>
-  	<url>https://github.com/cyfonly/thriftj</url>
-  	<connection>scm:git:https://github.com/cyfonly/thriftj.git</connection>
-  	<developerConnection>scm:git:ssh://git@github.com/cyfonly/thriftj.git</developerConnection>
+  	<url>https://github.com/cyfonly/ThriftJ</url>
+  	<connection>scm:git:https://github.com/cyfonly/ThriftJ.git</connection>
+  	<developerConnection>scm:git:ssh://git@github.com/cyfonly/ThriftJ.git</developerConnection>
   	<tag>HEAD</tag>
   </scm>
   
@@ -39,7 +39,7 @@
   		<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
   	</license>
   </licenses>
-  <inceptionYear>2016</inceptionYear>
+  <inceptionYear>2017</inceptionYear>
   
   <dependencies>
   	<dependency>
@@ -74,10 +74,11 @@
     	<version>${slf4j.version}</version>
 	</dependency>
 	<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-log4j12</artifactId>
-    <version>1.7.22</version>
-</dependency>
+    	<groupId>org.slf4j</groupId>
+    	<artifactId>slf4j-log4j12</artifactId>
+    	<version>1.7.22</version>
+    	<scope>test</scope>
+	</dependency>
   </dependencies>
   
   <profiles>

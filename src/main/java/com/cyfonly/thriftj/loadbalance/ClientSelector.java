@@ -46,8 +46,8 @@ public class ClientSelector {
     private AtomicInteger i = new AtomicInteger(0);
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public ClientSelector(String servers, int loadBalance, ConnectionValidator validator, GenericKeyedObjectPoolConfig poolConfig, FailoverStrategy strategy, int connTimeout, String backupServers) {
-    	this.failoverChecker = new FailoverChecker(validator, strategy);
+	public ClientSelector(String servers, int loadBalance, ConnectionValidator validator, GenericKeyedObjectPoolConfig poolConfig, FailoverStrategy strategy, int connTimeout, String backupServers, int serviceLevel) {
+    	this.failoverChecker = new FailoverChecker(validator, strategy, serviceLevel);
     	this.poolProvider = new DefaultThriftConnectionPool(new ThriftConnectionFactory(failoverChecker, connTimeout), poolConfig);
     	failoverChecker.setConnectionPool(poolProvider);
     	failoverChecker.setServerList(ThriftServer.parse(servers));

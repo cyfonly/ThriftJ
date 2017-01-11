@@ -18,5 +18,15 @@ public class Constant {
 		/**哈希**/
 		public final static int HASH = 4;
 	}
+	
+	//--------服务级别
+	public class ServiceLevel {
+		/**仅使用配置的 servers 列表中可用的服务**/
+		public final static int SERVERS_ONLY = 1;
+		/**当 servers 列表中的服务全部不可用时，使用 backupServers 列表中的可用服务**/
+		public final static int ALL_SERVERS = 2;
+		/**当 servers 和 backupServers 列表中的服务全部不可用时，返回 servers 列表中的所有服务**/
+		public final static int NOT_EMPTY = 3;
+	}
 
 }

@@ -12,6 +12,7 @@ import org.apache.thrift.transport.TTransport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.cyfonly.thriftj.constants.Constant;
 import com.cyfonly.thriftj.pool.ThriftConnectionPool;
 import com.cyfonly.thriftj.pool.ThriftServer;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
@@ -31,10 +32,12 @@ public class FailoverChecker {
 	private ThriftConnectionPool poolProvider;
 	private ConnectionValidator connectionValidator;
 	private ScheduledExecutorService checkExecutor;
+	private int serviceLevel;
 	
-	public FailoverChecker(ConnectionValidator connectionValidator, FailoverStrategy<ThriftServer> failoverStrategy) {
+	public FailoverChecker(ConnectionValidator connectionValidator, FailoverStrategy<ThriftServer> failoverStrategy, int serviceLevel) {
 		this.connectionValidator = connectionValidator;
 		this.failoverStrategy = failoverStrategy;
+		this.serviceLevel = serviceLevel;
 	}
 	
 	public void setConnectionPool(ThriftConnectionPool poolProvider) {
@@ -92,15 +95,21 @@ public class FailoverChecker {
 	private List<ThriftServer> getAvailableServers(boolean all) {
 		List<ThriftServer> returnList = new ArrayList<>();
 		Set<ThriftServer> failedServers = failoverStrategy.getFailed();
-		for (ThriftServer thriftServerInfo : serverList) {
-			if (!failedServers.contains(thriftServerInfo))
-				returnList.add(thriftServerInfo);
+		for (ThriftServer thriftServer : serverList) {
+			if (!failedServers.contains(thriftServer))
+				returnList.add(thriftServer);
+		}
+		if (this.serviceLevel == Constant.ServiceLevel.SERVERS_ONLY) {
+			return returnList;
 		}
 		if ((all || returnList.isEmpty()) && !backupServerList.isEmpty()) {
 			for (ThriftServer thriftServer : backupServerList) {
 				if (!failedServers.contains(thriftServer))
 					returnList.add(thriftServer);
 			}
+		}
+		if (this.serviceLevel == Constant.ServiceLevel.ALL_SERVERS) {
+			return returnList;
 		}
 		if(returnList.isEmpty()){
 			returnList.addAll(serverList);

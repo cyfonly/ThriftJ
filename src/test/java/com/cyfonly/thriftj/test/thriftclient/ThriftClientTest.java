@@ -47,6 +47,7 @@ public class ThriftClientTest {
 					.failoverStrategy(failoverStrategy)
 					.connTimeout(5)
 					.backupServers("")
+					.serviceLevel(Constant.ServiceLevel.NOT_EMPTY)
 					.start();
 		
 		Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(new Runnable() {

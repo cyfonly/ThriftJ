@@ -33,6 +33,7 @@ public class ThriftClient {
     private FailoverStrategy failoverStrategy;
     private int connTimeout;
     private String backupServers;
+    private int serviceLevel;
     
     private ClientSelector clientSelector;
     
@@ -111,12 +112,22 @@ public class ThriftClient {
     }
     
     /**
+     * 设置服务级别，根据此项配置进行服务降级
+     * @param serviceLevel 服务级别 {#link Constant#ServiceLevel}
+     * @return
+     */
+    public ThriftClient serviceLevel(int serviceLevel) {
+    	this.serviceLevel = serviceLevel;
+    	return this;
+    }
+    
+    /**
      * 启动 ThriftClient
      * @return ThriftClient
      */
     public ThriftClient start(){
     	checkAndInit();
-    	this.clientSelector = new ClientSelector(servers, loadBalance, validator, poolConfig, failoverStrategy, connTimeout, backupServers);
+    	this.clientSelector = new ClientSelector(servers, loadBalance, validator, poolConfig, failoverStrategy, connTimeout, backupServers, serviceLevel);
     	return this;
     }
 	
@@ -180,6 +191,9 @@ public class ThriftClient {
 		if (this.connTimeout == 0) {
 			this.connTimeout = DEFAULT_CONN_TIMEOUT;
 		}
+		if (!checkServiceLevel()) {
+			this.serviceLevel = Constant.ServiceLevel.NOT_EMPTY;
+		}
 	}
 	
 	private boolean checkLoadBalance() {
@@ -187,6 +201,15 @@ public class ThriftClient {
 				this.loadBalance == Constant.LoadBalance.ROUND_ROBIN ||
 				this.loadBalance == Constant.LoadBalance.WEIGHT ||
 				this.loadBalance == Constant.LoadBalance.HASH) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkServiceLevel() {
+		if(this.serviceLevel == Constant.ServiceLevel.SERVERS_ONLY ||
+				this.serviceLevel == Constant.ServiceLevel.ALL_SERVERS ||
+				this.serviceLevel == Constant.ServiceLevel.NOT_EMPTY) {
 			return true;
 		}
 		return false;
