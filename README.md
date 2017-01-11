@@ -11,7 +11,7 @@ A failover and load balance Thrift client with pooled connections
 <dependency>
     <groupId>com.github.cyfonly</groupId>
     <artifactId>thriftj</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 <dependency>
     log4j or logback, and so on...
