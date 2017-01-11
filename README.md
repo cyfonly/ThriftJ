@@ -2,8 +2,10 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cyfonly/ThriftJ/blob/master/LICENSE)  [![Built with Maven](http://maven.apache.org/images/logos/maven-feather.png)](http://search.maven.org/#search%7Cga%7C1%7Ccyfonly)  
 A failover and load balance Thrift client with pooled connections  
 # Features  
+1. 
+2. 
   
-#Usage  
+# Usage  
 #### 1. Maven
 ```
 <dependency>
@@ -16,3 +18,9 @@ A failover and load balance Thrift client with pooled connections
 </dependency>
 ```  
 
+
+# Demo  
+see [https://github.com/cyfonly/ThriftJ/tree/master/src/test](https://github.com/cyfonly/ThriftJ/tree/master/src/test)  
+
+# License  
+基于 Apache License 2.0 发布。有关详细信息，请参阅 [LICENSE](https://github.com/cyfonly/ThriftJ/blob/master/LICENSE)。
