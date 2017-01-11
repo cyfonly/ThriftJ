@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.cyfonly.thriftj.ThriftClient;
-import com.cyfonly.thriftj.ThriftClient2;
 import com.cyfonly.thriftj.constants.Constant;
 import com.cyfonly.thriftj.failover.ConnectionValidator;
 import com.cyfonly.thriftj.failover.FailoverStrategy;
@@ -40,7 +39,7 @@ public class ThriftClientTest {
 		GenericKeyedObjectPoolConfig poolConfig = new GenericKeyedObjectPoolConfig();
 		FailoverStrategy failoverStrategy = new FailoverStrategy();
 		
-		final ThriftClient2 thriftClient = new ThriftClient2();
+		final ThriftClient thriftClient = new ThriftClient();
 		thriftClient.servers(servers)
 					.loadBalance(Constant.LoadBalance.RANDOM)
 					.connectionValidator(validator)
