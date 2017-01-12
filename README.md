@@ -22,16 +22,24 @@ A failover and load balance Thrift client with pooled connections
 </dependency>
 ```  
 #### 2. 调用  
+>除 servers 必须配置外，其他配置均为可选（使用默认配置）  
+
 ```
+//Thrift server 列表
 private static final String servers = "127.0.0.1:10001,127.0.0.1:10002";
 
+//TTransport 验证器
 ConnectionValidator validator = new ConnectionValidator() {
     @Override
     public boolean isValid(TTransport object) {
         return object.isOpen();
     }
 };
+
+//连接对象池配置
 GenericKeyedObjectPoolConfig poolConfig = new GenericKeyedObjectPoolConfig();
+
+//failover 策略
 FailoverStrategy failoverStrategy = new FailoverStrategy();
 
 //构造 ThriftClient 对象并配置
