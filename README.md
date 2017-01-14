@@ -9,6 +9,9 @@ A failover and load balance Thrift client with pooled connections
 5. 多种可配置的负载均衡策略，支持随机、轮询、权重和哈希
 6. 多种可配置的服务级别，并自动根据服务级别进行服务降级  
   
+# Architectural Design  
+![design](https://github.com/cyfonly/ThriftJ/blob/master/pictures/ThriftJ_design.png "ThriftJ_design.png")  
+
 # Usage  
 #### 1. Maven
 ```
