@@ -1,6 +1,7 @@
 ![design](https://github.com/cyfonly/ThriftJ/blob/master/pictures/ThriftJ.png "ThriftJ")  
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/cyfonly/ThriftJ/blob/master/LICENSE)  [![Built with Maven](http://maven.apache.org/images/logos/maven-feather.png)](http://search.maven.org/#search%7Cga%7C1%7Ccyfonly)  
-A failover and load balance Thrift client with pooled connections  
+负载均衡和高可用的池化 Thrift Client  
+
 # Features  
 1. 链式调用API，简洁直观
 2. 完善的默认配置，无需担心调用时配置不全导致抛错
